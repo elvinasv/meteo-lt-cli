@@ -1,0 +1,26 @@
+{
+  "name": "meteo-lt-cli",
+  "version": "1.0.0",
+  "description": "Weather in Lithuania CLI powered by Meteo.lt. Created as a proof of concept with Node.js and yargs module",
+  "type": "module",
+  "main": "index.js",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "meteolt": "./index.js"
+  },
+  "keywords": [
+    "weather",
+    "meteo.lt",
+    "cli"
+  ],
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "yargs": "^17.7.2"
+  }
+}
