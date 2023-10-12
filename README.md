@@ -13,11 +13,10 @@ TBC
 - [x] Init project
 - [ ] Add basic CLI functionality
   - [x] stations
-  - [ ] Observations
+  - [x] Observations
   - [ ] places
   - [ ] forecast
-- [ ] Fetch data from meteo.lt
-- [ ] Display data in CLI
+- [ ] Add icons
 - [ ] Add typescript
 - [ ] Allow to run globally
 
@@ -33,12 +32,12 @@ List of all stations
 
 - `meteolt stations`
 
-#### Observations
+#### History
 
-Observations from the station. Latest observation by default. Up to 10 years of historical data provided.
+History from the station. Latest observation by default. Up to 10 years of historical data provided.
 Optional argument stationId (default is vilnius), default date - latest, (other in format YYYY-MM-DD)
 
-- `meteolt observation <stationId> <date>`
+- `meteolt history <stationId> <date>`
   - alias `meteolt -ob <stationId> <date>`
     - `--latest, -l` - show latest only
 
@@ -54,10 +53,13 @@ Forecast for the place. Default place - Vilnius. Verbose - show all forecast dat
 Default - short forecast. Default time - today.
 
 - `meteolt forecast <placeId>`
-  - details
-    - `-v, --verbose` - show all forecast data
-    - `-s, --short` - show short forecast data (default)
   - time
-    - `-d, --day` - show forecast for the day (default)
-    - `-t, --tomorrow` - show forecast for tomorrow
-    - `-w, --week` - show forecast for the week
+    - `d, day` - show forecast for the day (default)
+    - `t, tomorrow` - show forecast for tomorrow
+    - `w, week` - show forecast for the week
+
+#### Tags
+
+- details
+  - `--all` - show all properties (default: false)
+  - `--plain` - output as plain text (default: false)

@@ -6,3 +6,9 @@ export const meteoApiUrl =
 export const getAllStations = async () => {
   return await fetchData(`${meteoApiUrl}/stations`);
 };
+
+export const getStationHistory = async (stationCode, date) => {
+  return await fetchData(
+    `${meteoApiUrl}/stations/${stationCode}/observations/${date}`
+  );
+};
