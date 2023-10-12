@@ -1,17 +1,33 @@
 import "dotenv/config";
 import yargs from "yargs/yargs";
 import { hideBin } from "yargs/helpers";
-import { printData, log, filterWeatherProperties } from "./utils.js";
-import { getAllStations, getStationHistory } from "./weather.js";
+import { printData, log } from "./utils.js";
+import {
+  getAllStations,
+  getStationHistory,
+  getAllPlaces,
+  getForecast,
+  filterForecastProperties,
+  filterHistoryProperties,
+  filterForecastDataByPeriod,
+} from "./weather.js";
 
 yargs(hideBin(process.argv))
   .command({
     command: "stations",
-    desc: "List all observable stations",
+    desc: "List of all observable stations",
     handler: async (argv) => {
       const stations = await getAllStations();
-      log(`List of all observable stations`);
+      log(`All observable stations`);
       printData(stations, argv.plain);
+    },
+  })
+  .command({
+    command: "places",
+    desc: "List of places where forecast is available",
+    handler: async (argv) => {
+      const places = await getAllPlaces();
+      printData(places, argv.plain);
     },
   })
   .command({
@@ -31,26 +47,54 @@ yargs(hideBin(process.argv))
         });
     },
     handler: async (argv) => {
-      log(
-        `Getting observations about ${argv.stationId} station on ${argv.date} date`
-      );
+      log(`Observations: ${argv.stationId} station on the ${argv.date} date`);
       const history = await getStationHistory(argv.stationId, argv.date);
       const filtered = argv.all
         ? history.observations
-        : filterWeatherProperties(history.observations);
+        : filterHistoryProperties(history.observations);
 
       printData(filtered, argv.plain);
     },
   })
-  .option("json", {
-    describe: "output as json text",
+  .command({
+    command: "forecast [placeCode]",
+    desc: "Forecast for the place",
+    builder: (yargs) => {
+      yargs.positional("placeCode", {
+        type: "string",
+        default: "vilnius",
+      });
+    },
+    handler: async (argv) => {
+      log(`Forecast: ${argv.placeCode}`);
+      const forecast = await getForecast(argv.placeCode);
+
+      const filteredByPeriod = filterForecastDataByPeriod(
+        forecast.forecastTimestamps,
+        argv.period
+      );
+      const filteredByProperty = argv.all
+        ? filteredByPeriod
+        : filterForecastProperties(filteredByPeriod);
+
+      printData(filteredByProperty, argv.plain);
+    },
+  })
+  .option("plain", {
+    describe: "output as plain text",
     type: "boolean",
     default: false,
   })
   .option("all", {
-    describe: "include all weather properties",
+    describe: "Include all weather properties",
     type: "boolean",
     default: false,
+  })
+  .option("period", {
+    alias: ["time"],
+    choices: ["today", "tomorrow", "week"],
+    describe: "Weather forecast period",
+    default: "today",
   })
   .demandCommand(1)
   .help()

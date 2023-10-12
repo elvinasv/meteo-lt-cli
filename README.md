@@ -10,56 +10,72 @@ TBC
 
 ## TODO
 
-- [x] Init project
-- [ ] Add basic CLI functionality
-  - [x] stations
-  - [x] Observations
-  - [ ] places
-  - [ ] forecast
-- [ ] Add icons
+- [ ] Add caching for places
+  - [ ] fetch places if results older than 1 week
+  - [ ] write results to the file
 - [ ] Add typescript
 - [ ] Allow to run globally
 
 ## Usage
 
-- meteolt [command] [options]
+You can use the `meteo-lt-cli` CLI with the following commands and options:
 
-### Commands
+```
+node index.js history
+```
 
-#### Station
+### Commands:
 
-List of all stations
+- `places`: List of places with forecast
+- `stations`: List of all observable stations
+- `history [stationId] [date]`: History from the specified station
+- `forecast [placeCode]`: Forecast for the place
 
-- `meteolt stations`
+#### Global Options:
 
-#### History
+- `--version`: Show the version number
+- `--plain`: Output as plain text instead of table (default: false)
+- `--all`: Include all weather properties (default: false)
+- `--period`, `--time`: Weather forecast period (choices: "today," "tomorrow," "week," default: "today")
+- `--help`: Show help
 
-History from the station. Latest observation by default. Up to 10 years of historical data provided.
-Optional argument stationId (default is vilnius), default date - latest, (other in format YYYY-MM-DD)
+### `places`
 
-- `meteolt history <stationId> <date>`
-  - alias `meteolt -ob <stationId> <date>`
-    - `--latest, -l` - show latest only
+List of places where forecast is available
 
-#### Places
+```
+node index.js places
+```
 
-Places - the list of places that have weather forecast
+### `stations`
 
-- `meteolt places`
+List of all observable stations
 
-#### Forecast
+```
+node index.js stations
+```
 
-Forecast for the place. Default place - Vilnius. Verbose - show all forecast data.
-Default - short forecast. Default time - today.
+### `forecast [placeCode]`
 
-- `meteolt forecast <placeId>`
-  - time
-    - `d, day` - show forecast for the day (default)
-    - `t, tomorrow` - show forecast for tomorrow
-    - `w, week` - show forecast for the week
+Get the weather forecast for a specific place.
 
-#### Tags
+```
+node index.js forecast "kaunas" --period="week"
+```
 
-- details
-  - `--all` - show all properties (default: false)
-  - `--plain` - output as plain text (default: false)
+#### Positionals:
+
+- `placeCode`: The code for the place (default: "vilnius")
+
+### `history [stationId] [date]`
+
+Retrieve historical weather data from the specified station.
+
+```
+node index.js history "vilniaus-ams" "2020-01-01"
+```
+
+#### Positionals:
+
+- `stationId`: The ID of the station (default: "vilniaus-ams")
+- `date`: Date in YYYY-MM-DD format or "latest" (default: "latest")
