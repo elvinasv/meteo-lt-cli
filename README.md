@@ -10,7 +10,12 @@ TBC
 
 ## TODO
 
+- [x] Init project
 - [ ] Add basic CLI functionality
+  - [x] stations
+  - [ ] Observations
+  - [ ] places
+  - [ ] forecast
 - [ ] Fetch data from meteo.lt
 - [ ] Display data in CLI
 - [ ] Add typescript
@@ -22,11 +27,37 @@ TBC
 
 ### Commands
 
-- Station list
-  - `meteolt stations`
-- Observations
-  - `meteolt observations [stationId]`
-- places
-  - `meteolt places`
-- forecast [placeId]
-  - `meteolt forecast [placeId]`
+#### Station
+
+List of all stations
+
+- `meteolt stations`
+
+#### Observations
+
+Observations from the station. Latest observation by default. Up to 10 years of historical data provided.
+Optional argument stationId (default is vilnius), default date - latest, (other in format YYYY-MM-DD)
+
+- `meteolt observation <stationId> <date>`
+  - alias `meteolt -ob <stationId> <date>`
+    - `--latest, -l` - show latest only
+
+#### Places
+
+Places - the list of places that have weather forecast
+
+- `meteolt places`
+
+#### Forecast
+
+Forecast for the place. Default place - Vilnius. Verbose - show all forecast data.
+Default - short forecast. Default time - today.
+
+- `meteolt forecast <placeId>`
+  - details
+    - `-v, --verbose` - show all forecast data
+    - `-s, --short` - show short forecast data (default)
+  - time
+    - `-d, --day` - show forecast for the day (default)
+    - `-t, --tomorrow` - show forecast for tomorrow
+    - `-w, --week` - show forecast for the week

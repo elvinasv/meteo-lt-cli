@@ -1,14 +1,29 @@
-export const meteoApiUrl =
-  process.env.WEATHER_API_URL || "https://api.meteo.lt/v1";
+const isValidUrl = (urlString) => {
+  try {
+    return Boolean(new URL(urlString));
+  } catch (e) {
+    return false;
+  }
+};
 
 export const fetchData = async (url = "") => {
-  try {
-    const response = await fetch(
-      "https://api.meteo.lt/v1/stations/vilniaus-ams/observations/latest"
-    );
-    const data = await response.json();
-    console.log(data);
-  } catch (error) {
-    console.error(error);
+  if (!isValidUrl(url)) {
+    return null;
   }
+
+  try {
+    const response = await fetch(url);
+    return await response.json();
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+export const printData = (data) => {
+  console.log(data);
+};
+
+export const log = (text, prefix = "🚀 meteolt: ") => {
+  console.log("\x1b[1;33m%s\x1b[0m", prefix, text);
 };
