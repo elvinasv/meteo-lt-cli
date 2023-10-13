@@ -9,7 +9,8 @@
     "sourceType": "module"
   },
   "rules": {
-    "no-console": "off"
+    "no-console": "off",
+    "import/extensions": ["error", "ignorePackages"]
   },
   "ignorePatterns": ["node_modules/", "package-lock.json"]
 }

@@ -1,7 +1,7 @@
 import "dotenv/config";
 import yargsGlobal from "yargs/yargs";
 import { hideBin } from "yargs/helpers";
-import { printData, log } from "./utils";
+import { printData, log } from "./utils.js";
 import {
   getAllStations,
   getStationHistory,
@@ -10,7 +10,7 @@ import {
   filterForecastProperties,
   filterHistoryProperties,
   filterForecastDataByPeriod,
-} from "./weather";
+} from "./weather.js";
 
 yargsGlobal(hideBin(process.argv))
   .command({

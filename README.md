@@ -12,10 +12,6 @@ TBC
 
 ## TODO
 
-- [ ] Add caching for places
-  - [ ] fetch places if results older than 1 week
-  - [ ] write results to the file
-- [ ] Add typescript
 - [ ] Allow to run globally
 
 ## Usage
