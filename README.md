@@ -8,18 +8,37 @@ Weather in Lithuania CLI app (powered by [api.meteo.lt](https://api.meteo.lt/)).
 
 ## Installation
 
-TBC
+1. Clone the repository
+2. Install dependencies
 
-## TODO
+```bash
+npm install
+```
 
-- [ ] Allow to run globally
+3. Link the package (creates a symlink in the global `node_modules` folder to the current project)
+
+```bash
+npm link
+```
+
+4. Run the CLI
+
+```bash
+meteolt --help
+```
+
+5. Run without symlink
+
+```bash
+node index.js --help
+```
 
 ## Usage
 
-You can use the `meteo-lt-cli` CLI with the following commands and options:
+You can use the `meteolt` CLI with the following commands and options:
 
-```
-node index.js history
+```bash
+meteolt history
 ```
 
 ### Commands:
@@ -41,24 +60,24 @@ node index.js history
 
 List of places where forecast is available
 
-```
-node index.js places
+```bash
+meteolt places
 ```
 
 ### `stations`
 
 List of all observable stations
 
-```
-node index.js stations
+```bash
+meteolt stations
 ```
 
 ### `forecast [placeCode]`
 
 Get the weather forecast for a specific place.
 
-```
-node index.js forecast "kaunas" --period="week"
+```bash
+meteolt forecast "kaunas" --period="week"
 ```
 
 #### Positionals:
@@ -69,8 +88,8 @@ node index.js forecast "kaunas" --period="week"
 
 Retrieve historical weather data from the specified station.
 
-```
-node index.js history "vilniaus-ams" "2020-01-01"
+```bash
+meteolt history "vilniaus-ams" "2020-01-01"
 ```
 
 #### Positionals:
