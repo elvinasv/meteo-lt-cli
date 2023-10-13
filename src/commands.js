@@ -1,7 +1,7 @@
 import "dotenv/config";
-import yargs from "yargs/yargs";
+import yargsGlobal from "yargs/yargs";
 import { hideBin } from "yargs/helpers";
-import { printData, log } from "./utils.js";
+import { printData, log } from "./utils";
 import {
   getAllStations,
   getStationHistory,
@@ -10,15 +10,15 @@ import {
   filterForecastProperties,
   filterHistoryProperties,
   filterForecastDataByPeriod,
-} from "./weather.js";
+} from "./weather";
 
-yargs(hideBin(process.argv))
+yargsGlobal(hideBin(process.argv))
   .command({
     command: "stations",
     desc: "List of all observable stations",
     handler: async (argv) => {
       const stations = await getAllStations();
-      log(`All observable stations`);
+      log("All observable stations");
       printData(stations, argv.plain);
     },
   })
@@ -71,7 +71,7 @@ yargs(hideBin(process.argv))
 
       const filteredByPeriod = filterForecastDataByPeriod(
         forecast.forecastTimestamps,
-        argv.period
+        argv.period,
       );
       const filteredByProperty = argv.all
         ? filteredByPeriod

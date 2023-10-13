@@ -1,27 +1,17 @@
-import { fetchData } from "./utils.js";
+import { fetchData } from "./utils";
 
 export const meteoApiUrl =
   process.env.WEATHER_API_URL || "https://api.meteo.lt/v1";
 
-export const getAllStations = async () => {
-  return await fetchData(`${meteoApiUrl}/stations`);
-};
+export const getAllStations = async () => fetchData(`${meteoApiUrl}/stations`);
 
-export const getStationHistory = async (stationCode, date) => {
-  return await fetchData(
-    `${meteoApiUrl}/stations/${stationCode}/observations/${date}`
-  );
-};
+export const getStationHistory = async (stationCode, date) =>
+  fetchData(`${meteoApiUrl}/stations/${stationCode}/observations/${date}`);
 
-export const getAllPlaces = async () => {
-  return await fetchData(`${meteoApiUrl}/places`);
-};
+export const getAllPlaces = async () => fetchData(`${meteoApiUrl}/places`);
 
-export const getForecast = async (placeCode) => {
-  return await fetchData(
-    `${meteoApiUrl}/places/${placeCode}/forecasts/long-term`
-  );
-};
+export const getForecast = async (placeCode) =>
+  fetchData(`${meteoApiUrl}/places/${placeCode}/forecasts/long-term`);
 
 export const observationSummaryProperties = [
   "observationTimeUtc",
@@ -39,25 +29,22 @@ export const forecastSummaryProperties = [
   "conditionCode",
 ];
 
-const filterWeatherProperties = (data = [], filterArray) => {
-  return data.map((item) => {
+const filterWeatherProperties = (data = [], filterArray = []) =>
+  data.map((item) => {
     const summary = {};
     filterArray.forEach((prop) => {
       summary[prop] = item[prop];
     });
     return summary;
   });
-};
 
-export const filterHistoryProperties = (data = []) => {
-  return filterWeatherProperties(data, observationSummaryProperties);
-};
+export const filterHistoryProperties = (data = []) =>
+  filterWeatherProperties(data, observationSummaryProperties);
 
-export const filterForecastProperties = (data = []) => {
-  return filterWeatherProperties(data, forecastSummaryProperties);
-};
+export const filterForecastProperties = (data = []) =>
+  filterWeatherProperties(data, forecastSummaryProperties);
 
-export const filterForecastDataByPeriod = (data = [], period) => {
+export const filterForecastDataByPeriod = (data = [], period = "today") => {
   const result = data.filter(({ forecastTimeUtc = null }) => {
     const today = new Date();
     const date = new Date(forecastTimeUtc);
