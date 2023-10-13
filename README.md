@@ -2,11 +2,13 @@
 
 ## About
 
-Weather in Lithuania CLI app (powered by [api.meteo.lt](https://api.meteo.lt/)). This is a proof of concept app that is not intended for production use but rather testing [yargs](https://github.com/yargs/yargs) library.
+Weather in Lithuania CLI app ☀️ (powered by [api.meteo.lt](https://api.meteo.lt/)). This is a proof of concept app that is not intended for production use but rather testing [yargs](https://github.com/yargs/yargs) library.
 
 <img width="797" alt="image" src="https://github.com/elvinasv/meteo-lt-cli/assets/10553848/ce869723-481a-4615-906a-666919166448">
 
 ## Installation
+
+Note: use Node.js version 18 or higher.
 
 1. Clone the repository
 2. Install dependencies
