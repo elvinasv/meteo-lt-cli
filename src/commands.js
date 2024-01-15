@@ -58,6 +58,7 @@ yargsGlobal(hideBin(process.argv))
   })
   .command({
     command: "forecast [placeCode]",
+    aliases: ["*"],
     desc: "Forecast for the place",
     builder: (yargs) => {
       yargs.positional("placeCode", {

@@ -30,13 +30,11 @@ export const forecastSummaryProperties = [
 ];
 
 const filterWeatherProperties = (data = [], filterArray = []) =>
-  data.map((item) => {
-    const summary = {};
-    filterArray.forEach((prop) => {
-      summary[prop] = item[prop];
-    });
-    return summary;
-  });
+  data.map((item) =>
+    filterArray.reduce((acc, prop) => {
+      return { ...acc, [prop]: item[prop] };
+    }, {}),
+  );
 
 export const filterHistoryProperties = (data = []) =>
   filterWeatherProperties(data, observationSummaryProperties);
